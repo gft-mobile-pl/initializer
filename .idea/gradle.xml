@@ -9,6 +9,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/example" />
+            <option value="$PROJECT_DIR$/initializer" />
+            <option value="$PROJECT_DIR$/initializer/domain" />
+            <option value="$PROJECT_DIR$/initializer/ui" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

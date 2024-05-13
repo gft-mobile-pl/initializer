@@ -21,3 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "Initializer"
 include(":example")
+include(":initializer:domain")
+include(":initializer:ui")
