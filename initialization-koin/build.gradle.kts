@@ -4,7 +4,8 @@ plugins {
 }
 
 android {
-    namespace = "com.gft.initializer.ui"
+    namespace = "com.gft.initialization"
+    group = "com.gft.initialization"
     compileSdk = 34
 
     defaultConfig {
@@ -27,12 +28,25 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()
     }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.8"
+    }
 }
 
 dependencies {
-    implementation(project(":initializer:domain"))
+    implementation(project(":initialization:ui"))
+    implementation(project(":initialization:domain"))
+    implementation(project(":libs:mvi"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+
+    implementation(platform(libs.koin.bom))
+    implementation(libs.koin.core)
+    implementation(libs.koin.compose)
+    implementation(libs.koin.android)
 }

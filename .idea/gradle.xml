@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
@@ -9,9 +10,12 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/example" />
-            <option value="$PROJECT_DIR$/initializer" />
-            <option value="$PROJECT_DIR$/initializer/domain" />
-            <option value="$PROJECT_DIR$/initializer/ui" />
+            <option value="$PROJECT_DIR$/initialization" />
+            <option value="$PROJECT_DIR$/initialization-koin" />
+            <option value="$PROJECT_DIR$/initialization/domain" />
+            <option value="$PROJECT_DIR$/initialization/ui" />
+            <option value="$PROJECT_DIR$/libs" />
+            <option value="$PROJECT_DIR$/libs/mvi" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

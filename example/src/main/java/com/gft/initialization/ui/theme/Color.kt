@@ -1,4 +1,4 @@
-package com.gft.initializer.ui.theme
+package com.gft.initialization.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
