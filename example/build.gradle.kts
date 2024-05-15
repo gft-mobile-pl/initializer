@@ -49,7 +49,6 @@ android {
 dependencies {
     implementation(project(":initialization:ui"))
     implementation(project(":initialization:domain"))
-    implementation(project(":initialization-koin"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

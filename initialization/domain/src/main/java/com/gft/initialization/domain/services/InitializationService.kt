@@ -4,6 +4,7 @@ import com.gft.initialization.domain.model.InitState
 import com.gft.initialization.domain.model.InitState.Initialized
 import com.gft.initialization.domain.model.InitState.Initializing
 import com.gft.initialization.domain.model.InitState.NotInitialized
+import com.gft.initialization.domain.model.InitializationIdentifier
 import com.gft.initialization.domain.model.Initializer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
@@ -12,23 +13,43 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class InitializationService(
-    private val initializers: List<() -> Initializer>,
-) {
-    private val _initState = MutableStateFlow<InitState>(NotInitialized)
-    val initState: StateFlow<InitState> = _initState
+object InitializationService {
+    private val definitions = hashMapOf<InitializationIdentifier, InitializationDefinition>()
 
-    fun init() {
+    fun defineInitializationProcess(
+        identifier: InitializationIdentifier,
+        initializers: List<() -> Initializer>,
+    ) {
+        if (definitions.containsKey(identifier)) {
+            throw IllegalArgumentException("There is another initialization process defined already with the provided identifier.")
+        }
+
+        definitions[identifier] = InitializationDefinition(initializers)
+    }
+
+    fun initialize(identifier: InitializationIdentifier) {
+        val definition =
+            definitions[identifier] ?: throw IllegalArgumentException("There is no initialization process defined with the provided identifier.")
+        if (definition.state.value != NotInitialized) return
+
         CoroutineScope(Dispatchers.Unconfined).launch(start = CoroutineStart.UNDISPATCHED) {
-            _initState.value = Initializing
+            definition.state.value = Initializing
             try {
-                initializers.forEach { initializerProvider ->
+                definition.initializers.forEach { initializerProvider ->
                     initializerProvider().initialize()
                 }
-                _initState.value = Initialized
+                definition.state.value = Initialized
             } catch (error: Throwable) {
-                _initState.value = InitState.Failed(error)
+                definition.state.value = InitState.Failed(error)
             }
         }
     }
+
+    fun getInitializationState(identifier: InitializationIdentifier): StateFlow<InitState> =
+        definitions[identifier]?.state ?: throw IllegalArgumentException("There is no initialization process defined with the provided identifier.")
+
+    private class InitializationDefinition(
+        val initializers: List<() -> Initializer>,
+        val state: MutableStateFlow<InitState> = MutableStateFlow(NotInitialized),
+    )
 }

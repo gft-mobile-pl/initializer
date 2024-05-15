@@ -5,8 +5,8 @@ import com.gft.initialization.domain.model.InitState
 import com.gft.initialization.domain.model.InitState.Failed
 import com.gft.initialization.domain.model.InitState.Initializing
 import com.gft.initialization.domain.model.InitState.NotInitialized
-import com.gft.initialization.domain.usecases.StartInitializationUseCase
-import com.gft.initialization.domain.usecases.StreamInitializationStateUseCase
+import com.gft.initialization.domain.model.InitializationIdentifier
+import com.gft.initialization.domain.services.InitializationService
 import com.gft.initialization.ui.InitializeViewEffect.Restart
 import com.gft.initialization.ui.InitializeViewEvent.OnRetryClicked
 import com.gft.initialization.ui.InitializeViewState.Content
@@ -20,12 +20,11 @@ import kotlinx.coroutines.flow.StateFlow
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 class InitializeViewModel(
     showContentDuringInitialization: Boolean,
-    startInitialization: StartInitializationUseCase,
-    streamInitializationState: StreamInitializationStateUseCase,
+    initializationIdentifier: InitializationIdentifier,
     errorRenderersProvider: () -> List<InitializationErrorRenderer>,
 ) : BaseMviViewModel<InitializeViewState, InitializeViewEvent, NavigationEffect, InitializeViewEffect>() {
 
-    override val viewStates: StateFlow<InitializeViewState> = streamInitializationState()
+    override val viewStates: StateFlow<InitializeViewState> = InitializationService.getInitializationState(initializationIdentifier)
         .mapStateFlow { state ->
             when (state) {
                 NotInitialized, Initializing -> {
@@ -50,7 +49,7 @@ class InitializeViewModel(
         }
 
     init {
-        startInitialization()
+        InitializationService.initialize(initializationIdentifier)
     }
 
     override fun onEvent(event: InitializeViewEvent) {

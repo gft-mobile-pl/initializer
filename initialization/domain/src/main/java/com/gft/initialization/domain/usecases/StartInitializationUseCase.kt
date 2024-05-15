@@ -1,13 +1,9 @@
 package com.gft.initialization.domain.usecases
 
-import com.gft.initialization.domain.model.InitState.NotInitialized
+import com.gft.initialization.domain.model.InitializationIdentifier
 import com.gft.initialization.domain.services.InitializationService
 
-class StartInitializationUseCase(private val initializationService: InitializationService) {
+class StartInitializationUseCase {
 
-    operator fun invoke() {
-        if (initializationService.initState.value == NotInitialized) {
-            initializationService.init()
-        }
-    }
+    operator fun invoke(identifier: InitializationIdentifier) = InitializationService.initialize(identifier)
 }
