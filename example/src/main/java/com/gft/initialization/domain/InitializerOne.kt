@@ -1,0 +1,13 @@
+package com.gft.initialization.domain
+
+import android.util.Log
+import com.gft.initialization.domain.model.Initializer
+import kotlinx.coroutines.delay
+
+class InitializerOne : Initializer {
+    override suspend fun initialize() {
+        Log.d("#Initialization", "Initializer One: start.")
+        delay(500)
+        Log.d("#Initialization", "Initializer One: end.")
+    }
+}
