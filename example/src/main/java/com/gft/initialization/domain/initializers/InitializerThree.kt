@@ -1,4 +1,4 @@
-package com.gft.initialization.domain
+package com.gft.initialization.domain.initializers
 
 import android.util.Log
 import com.gft.initialization.domain.model.Initializer

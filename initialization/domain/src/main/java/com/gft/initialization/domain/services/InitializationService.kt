@@ -9,12 +9,16 @@ import com.gft.initialization.domain.model.Initializer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.launch
 
 object InitializationService {
     private val definitions = hashMapOf<InitializationIdentifier, InitializationDefinition>()
+    private val onInitializationDefined = MutableStateFlow<InitializationIdentifier?>(null)
 
     fun defineInitializationProcess(
         identifier: InitializationIdentifier,
@@ -25,12 +29,13 @@ object InitializationService {
         }
 
         definitions[identifier] = InitializationDefinition(initializers)
+        onInitializationDefined.value = identifier
     }
 
     fun initialize(identifier: InitializationIdentifier) {
         val definition =
             definitions[identifier] ?: throw IllegalArgumentException("There is no initialization process defined with the provided identifier.")
-        if (definition.state.value != NotInitialized) return
+        if (definition.state.value == Initializing || definition.state.value == Initialized) return
 
         CoroutineScope(Dispatchers.Unconfined).launch(start = CoroutineStart.UNDISPATCHED) {
             definition.state.value = Initializing
@@ -45,8 +50,20 @@ object InitializationService {
         }
     }
 
-    fun getInitializationState(identifier: InitializationIdentifier): StateFlow<InitState> =
-        definitions[identifier]?.state ?: throw IllegalArgumentException("There is no initialization process defined with the provided identifier.")
+    fun getInitializationState(identifier: InitializationIdentifier): StateFlow<InitState> = object : StateFlow<InitState> {
+        private val initializationState: StateFlow<InitState>?
+            get() = definitions[identifier]?.state
+
+        override val replayCache: List<InitState> = initializationState?.replayCache ?: listOf(NotInitialized)
+
+        override val value: InitState
+            get() = initializationState?.value ?: NotInitialized
+
+        override suspend fun collect(collector: FlowCollector<InitState>): Nothing {
+            (initializationState ?: onInitializationDefined.mapNotNull { initializationState }.first()).collect(collector)
+        }
+    }
+
 
     private class InitializationDefinition(
         val initializers: List<() -> Initializer>,

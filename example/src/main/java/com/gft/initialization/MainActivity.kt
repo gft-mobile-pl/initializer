@@ -1,29 +1,50 @@
 package com.gft.initialization
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import com.gft.initialization.di.AppInitializationErrorRenderers
+import com.gft.initialization.domain.model.ApplicationInitializationIdentifier
+import com.gft.initialization.ui.Initialize
+import com.gft.initialization.ui.initializationprogressindicator.CustomSplashScreen
 import com.gft.initialization.ui.theme.InitializerTheme
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.get
+import kotlin.system.exitProcess
 
-class MainActivity : ComponentActivity() {
+class MainActivity : ComponentActivity(), KoinComponent {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             InitializerTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    Initialize(
+                        initializationIdentifier = ApplicationInitializationIdentifier,
+                        showContentDuringInitialization = true,
+                        errorRenderersProvider = get(AppInitializationErrorRenderers)
+                    ) {
+
+                        CustomSplashScreen(
+                            initializationIdentifier = ApplicationInitializationIdentifier
+                        ) {
+                            ApplicationContent(
+                                modifier = Modifier.padding(innerPadding)
+                            )
+                        }
+                    }
                 }
             }
         }
@@ -31,17 +52,15 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    InitializerTheme {
-        Greeting("Android")
+fun ApplicationContent(modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "Application Content",
+            color = MaterialTheme.colorScheme.primary
+        )
     }
 }
