@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.Dialog
-import com.gft.initialization.domain.model.InitializationIdentifier
+import com.gft.initialization.model.InitializationIdentifier
 import com.gft.mvi.MviViewModel
 import com.gft.mvi.NavigationEffect
 import com.gft.mvi.ViewEffect
@@ -42,4 +42,3 @@ fun CustomSplashScreen(
         }
     }
 }
-

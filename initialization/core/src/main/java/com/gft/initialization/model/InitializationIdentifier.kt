@@ -1,4 +1,4 @@
-package com.gft.initialization.domain.model
+package com.gft.initialization.model
 
 @JvmInline
 value class InitializationIdentifier(val id: String)

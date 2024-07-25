@@ -2,8 +2,8 @@ package com.gft.initialization.framework
 
 import android.util.Log
 import com.gft.initialization.domain.model.ApplicationInitializationIdentifier
-import com.gft.initialization.domain.model.InitState
-import com.gft.initialization.domain.usecases.StreamInitializationStateUseCase
+import com.gft.initialization.model.InitState
+import com.gft.initialization.usecases.StreamInitializationStateUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

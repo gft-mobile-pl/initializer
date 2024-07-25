@@ -7,7 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.gft.initialization.domain.model.InitializationIdentifier
+import com.gft.initialization.model.InitializationIdentifier
 import com.gft.initialization.ui.InitializeViewState.Content
 import com.gft.initialization.ui.InitializeViewState.Empty
 import com.gft.initialization.ui.InitializeViewState.Error

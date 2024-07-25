@@ -1,8 +1,8 @@
-package com.gft.initialization.domain.usecases
+package com.gft.initialization.usecases
 
-import com.gft.initialization.domain.model.InitializationIdentifier
-import com.gft.initialization.domain.model.Initializer
-import com.gft.initialization.domain.services.InitializationService
+import com.gft.initialization.model.InitializationIdentifier
+import com.gft.initialization.model.Initializer
+import com.gft.initialization.services.InitializationService
 
 class DefineInitializationProcessUseCase {
     operator fun invoke(

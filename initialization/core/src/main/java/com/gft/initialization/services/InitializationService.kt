@@ -1,11 +1,11 @@
-package com.gft.initialization.domain.services
+package com.gft.initialization.services
 
-import com.gft.initialization.domain.model.InitState
-import com.gft.initialization.domain.model.InitState.Initialized
-import com.gft.initialization.domain.model.InitState.Initializing
-import com.gft.initialization.domain.model.InitState.NotInitialized
-import com.gft.initialization.domain.model.InitializationIdentifier
-import com.gft.initialization.domain.model.Initializer
+import com.gft.initialization.model.InitState
+import com.gft.initialization.model.InitState.Initialized
+import com.gft.initialization.model.InitState.Initializing
+import com.gft.initialization.model.InitState.NotInitialized
+import com.gft.initialization.model.InitializationIdentifier
+import com.gft.initialization.model.Initializer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Dispatchers

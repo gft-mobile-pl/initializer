@@ -1,27 +1,29 @@
 [versions]
 agp = "8.4.0"
 kotlin = "1.9.22"
-coreKtx = "1.13.1"
+core-ktx = "1.13.1"
 coroutines = "1.7.3"
 annotation = "1.8.0"
 junit = "4.13.2"
-junitVersion = "1.1.5"
-espressoCore = "3.5.1"
-composeBom = "2024.05.00"
-jetbrainsKotlinJvm = "1.9.22"
+junit-version = "1.1.5"
+espresso-core = "3.5.1"
+compose-bom = "2024.05.00"
+jetbrains-kotlin-jvm = "1.9.22"
 activity = "1.9.0"
 appcompat = "1.6.1"
 koin-bom = "3.5.6"
+gft-mvi = "1.0.4"
+maven-publish = "0.29.0"
 
 [libraries]
 
-androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
 androidx-annotation = { group = "androidx.annotation", name="annotation", version.ref = "annotation" }
 # androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle" }
 
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity" }
 
-androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
 androidx-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose" }
 androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
@@ -41,14 +43,16 @@ koin-core = { module = "io.insert-koin:koin-core" }
 koin-android = { module = "io.insert-koin:koin-android" }
 koin-compose = { module = "io.insert-koin:koin-androidx-compose" }
 
+gft-mvi-compose = { group = "com.gft.mobile", name = "mvi-compose", version.ref = "gft-mvi" }
+
 junit = { group = "junit", name = "junit", version.ref = "junit" }
-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
-androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junit-version" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
+jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrains-kotlin-jvm" }
 android-library = { id = "com.android.library", version.ref = "agp" }
-
+maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "maven-publish" }

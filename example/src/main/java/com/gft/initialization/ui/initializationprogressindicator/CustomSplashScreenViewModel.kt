@@ -1,10 +1,10 @@
 package com.gft.initialization.ui.initializationprogressindicator
 
 import androidx.lifecycle.viewModelScope
-import com.gft.initialization.domain.model.InitState
-import com.gft.initialization.domain.model.InitState.Initialized
-import com.gft.initialization.domain.model.InitializationIdentifier
-import com.gft.initialization.domain.usecases.StreamInitializationStateUseCase
+import com.gft.initialization.model.InitState
+import com.gft.initialization.model.InitState.Initialized
+import com.gft.initialization.model.InitializationIdentifier
+import com.gft.initialization.usecases.StreamInitializationStateUseCase
 import com.gft.mvi.BaseMviViewModel
 import com.gft.mvi.NavigationEffect
 import com.gft.mvi.ViewEffect

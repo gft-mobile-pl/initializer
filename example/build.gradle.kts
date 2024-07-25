@@ -48,8 +48,9 @@ android {
 
 dependencies {
     implementation(project(":initialization:ui"))
-    implementation(project(":initialization:domain"))
-    implementation(project(":libs:mvi"))
+    implementation(project(":initialization:core"))
+
+    implementation(libs.gft.mvi.compose)
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.core.ktx)

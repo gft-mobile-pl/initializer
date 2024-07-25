@@ -2,7 +2,7 @@ package com.gft.initialization.domain.initializers
 
 import android.util.Log
 import com.gft.initialization.domain.model.VerySpecificError
-import com.gft.initialization.domain.model.Initializer
+import com.gft.initialization.model.Initializer
 import kotlinx.coroutines.delay
 
 class FailingInitializer : Initializer {

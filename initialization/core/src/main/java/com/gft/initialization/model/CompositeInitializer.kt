@@ -1,4 +1,4 @@
-package com.gft.initialization.domain.model
+package com.gft.initialization.model
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async

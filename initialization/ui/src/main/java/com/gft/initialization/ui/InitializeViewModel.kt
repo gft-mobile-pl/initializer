@@ -1,12 +1,12 @@
 package com.gft.initialization.ui
 
 import androidx.annotation.RestrictTo
-import com.gft.initialization.domain.model.InitState
-import com.gft.initialization.domain.model.InitState.Failed
-import com.gft.initialization.domain.model.InitState.Initializing
-import com.gft.initialization.domain.model.InitState.NotInitialized
-import com.gft.initialization.domain.model.InitializationIdentifier
-import com.gft.initialization.domain.services.InitializationService
+import com.gft.initialization.model.InitState
+import com.gft.initialization.model.InitState.Failed
+import com.gft.initialization.model.InitState.Initializing
+import com.gft.initialization.model.InitState.NotInitialized
+import com.gft.initialization.model.InitializationIdentifier
+import com.gft.initialization.services.InitializationService
 import com.gft.initialization.ui.InitializeViewState.Content
 import com.gft.initialization.ui.InitializeViewState.Empty
 import com.gft.initialization.ui.InitializeViewState.Error

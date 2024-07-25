@@ -6,11 +6,11 @@ import com.gft.initialization.domain.initializers.InitializerFour
 import com.gft.initialization.domain.initializers.InitializerOne
 import com.gft.initialization.domain.initializers.InitializerThree
 import com.gft.initialization.domain.initializers.InitializerTwo
-import com.gft.initialization.domain.model.InitializationIdentifier
-import com.gft.initialization.domain.model.initializeInParallel
-import com.gft.initialization.domain.usecases.DefineInitializationProcessUseCase
-import com.gft.initialization.domain.usecases.StartInitializationUseCase
-import com.gft.initialization.domain.usecases.StreamInitializationStateUseCase
+import com.gft.initialization.model.InitializationIdentifier
+import com.gft.initialization.model.initializeInParallel
+import com.gft.initialization.usecases.DefineInitializationProcessUseCase
+import com.gft.initialization.usecases.StartInitializationUseCase
+import com.gft.initialization.usecases.StreamInitializationStateUseCase
 import com.gft.initialization.framework.ApplicationInitializationErrorReporter
 import com.gft.initialization.framework.usecases.RestartApplicationUseCase
 import com.gft.initialization.ui.initializationerrorrenders.GeneralErrorRenderer
