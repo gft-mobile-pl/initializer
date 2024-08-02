@@ -53,7 +53,7 @@ val appModule = module {
                 )
             },
             { get<InitializerFive>() },
-            { get<FailingInitializer>() } // Uncomment to test initialization error.
+            //{ get<FailingInitializer>() } // Uncomment to test initialization error.
         )
     }
 

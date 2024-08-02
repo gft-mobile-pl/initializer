@@ -19,7 +19,7 @@ import org.koin.core.parameter.parametersOf
 @Composable
 fun CustomSplashScreen(
     initializationIdentifier: InitializationIdentifier,
-    viewModel: MviViewModel<CustomSplashScreenViewState, ViewEvent, NavigationEffect, ViewEffect> = koinViewModel<CustomSplashScreenViewModel>() {
+    viewModel: MviViewModel<CustomSplashScreenViewState, ViewEvent, NavigationEffect, ViewEffect> = koinViewModel<CustomSplashScreenViewModel> {
         parametersOf(initializationIdentifier)
     },
     content: @Composable () -> Unit,

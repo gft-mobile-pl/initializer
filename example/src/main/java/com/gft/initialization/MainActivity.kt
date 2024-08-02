@@ -1,6 +1,5 @@
 package com.gft.initialization
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -22,7 +21,6 @@ import com.gft.initialization.ui.initializationprogressindicator.CustomSplashScr
 import com.gft.initialization.ui.theme.InitializerTheme
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
-import kotlin.system.exitProcess
 
 class MainActivity : ComponentActivity(), KoinComponent {
     override fun onCreate(savedInstanceState: Bundle?) {
