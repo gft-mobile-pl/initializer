@@ -20,7 +20,7 @@ import kotlinx.coroutines.flow.StateFlow
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 class InitializeViewModel(
     showContentDuringInitialization: Boolean,
-    private val initializationIdentifier: InitializationIdentifier,
+    initializationIdentifier: InitializationIdentifier,
     errorRenderersProvider: () -> List<InitializationErrorRenderer>,
 ) : BaseMviViewModel<InitializeViewState, ViewEvent, NavigationEffect, ViewEffect>() {
 

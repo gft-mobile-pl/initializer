@@ -3,19 +3,17 @@ agp = "8.5.1"
 kotlin = "1.9.22"
 core-ktx = "1.13.1"
 coroutines = "1.7.3"
-annotation = "1.8.1"
 compose-bom = "2024.06.00"
-jetbrains-kotlin-jvm = "1.9.22"
 activity = "1.9.1"
 koin-bom = "3.5.6"
-gft-mvi = "1.0.5"
+gft-mvi = "1.1.0"
 maven-publish = "0.29.0"
+compose = "1.7.3"
+lifecycle = "2.8.4"
+viewmodel = "2.8.4"
 
 [libraries]
-
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
-androidx-annotation = { group = "androidx.annotation", name="annotation", version.ref = "annotation" }
-
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity" }
 
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
@@ -37,10 +35,16 @@ koin-android = { module = "io.insert-koin:koin-android" }
 koin-compose = { module = "io.insert-koin:koin-androidx-compose" }
 
 gft-mvi-compose = { group = "com.gft.mobile", name = "mvi-compose", version.ref = "gft-mvi" }
+gft-mvi-core= { group = "com.gft.mobile", name = "mvi-core", version.ref = "gft-mvi" }
+
+lifecycle-runtime-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle" }
+viewmodel = { group ="org.jetbrains.androidx.lifecycle", name="lifecycle-viewmodel", version.ref="viewmodel"}
+viewmodel-compose = { group ="org.jetbrains.androidx.lifecycle", name="lifecycle-viewmodel-compose", version.ref="viewmodel"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrains-kotlin-jvm" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "maven-publish" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+compose = { id = "org.jetbrains.compose", version.ref = "compose" }

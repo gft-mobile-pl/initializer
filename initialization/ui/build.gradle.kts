@@ -1,4 +1,3 @@
-import com.vanniktech.maven.publish.AndroidSingleVariantLibrary
 import com.vanniktech.maven.publish.SonatypeHost
 import groovy.namespace.QName
 import groovy.util.Node
@@ -6,8 +5,42 @@ import groovy.util.NodeList
 
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.maven.publish)
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.compose)
+}
+
+kotlin {
+    androidTarget {
+        compilations.all {
+            kotlinOptions {
+                jvmTarget = Java.jvmTarget
+            }
+        }
+    }
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+
+    sourceSets {
+        val commonMain by getting {
+            dependencies {
+                implementation(compose.ui)
+                implementation(compose.foundation)
+                implementation(libs.lifecycle.runtime.compose)
+                implementation(libs.viewmodel)
+                implementation(libs.viewmodel.compose)
+
+                implementation(project(":initialization:core"))
+                implementation(libs.gft.mvi.compose)
+                implementation(libs.gft.mvi.core)
+            }
+        }
+    }
+}
+
+compose {
+    kotlinCompilerPlugin.set(Compose.kotlinCompilerPlugin)
 }
 
 android {
@@ -17,39 +50,15 @@ android {
 
     defaultConfig {
         minSdk = 29
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
     }
 
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-        }
-    }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
-    }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.8"
+        sourceCompatibility = Java.sourceCompatibility
+        targetCompatibility = Java.targetCompatibility
     }
 }
 
 mavenPublishing {
-    configure(
-        AndroidSingleVariantLibrary(
-            sourcesJar = true,
-            publishJavadocJar = true,
-        )
-    )
     coordinates(project.property("libraryGroupId") as String, "initializer-ui", project.property("libraryVersion") as String)
 
     pom {
@@ -88,9 +97,9 @@ mavenPublishing {
                 }
             }
         }
-        publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
-        signAllPublications()
     }
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+    signAllPublications()
 }
 
 // Skipping javaDoc generation due to dokka/agp issue: https://github.com/Kotlin/dokka/issues/2956
@@ -98,18 +107,4 @@ tasks.matching { task ->
     task.name.contains("javaDocReleaseGeneration", ignoreCase = true) || task.name.contains("javaDocDebugGeneration", ignoreCase = true)
 }.configureEach {
     enabled = false
-}
-
-dependencies {
-
-    implementation(project(":initialization:core"))
-    implementation(libs.gft.mvi.compose)
-
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.annotation)
-    implementation(libs.androidx.lifecycle.viewmodel.compose)
-
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.material3)
-    implementation(platform(libs.androidx.compose.bom))
 }

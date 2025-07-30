@@ -1,11 +1,11 @@
 package com.gft.initialization.model
 
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
-import java.util.Optional
 
 private class CompositeInitializer(
     private val initializers: List<() -> Initializer>,
@@ -21,15 +21,15 @@ private class CompositeInitializer(
                             withContext(Dispatchers.IO) {
                                 initializer().initialize()
                             }
-                            Optional.empty<Throwable>()
+                            Result.success(Unit)
                         } catch (error: Throwable) {
-                            Optional.of(error)
+                            Result.failure(error)
                         }
                     }
                 }
                 .awaitAll()
-                .forEach { error ->
-                    if (error.isPresent) throw error.get()
+                .forEach { result ->
+                    if (result.isFailure) throw result.exceptionOrNull()!!
                 }
         }
     }
